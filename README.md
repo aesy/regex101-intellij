@@ -2,6 +2,7 @@
 
 This plugin adds an intention to open regular expressions on regex101.com
 
+[![Plugin repository](https://img.shields.io/jetbrains/plugin/v/14461-open-regex101?label=plugin%20repository&style=flat-square)](https://plugins.jetbrains.com/plugin/14461-open-regex101)
 [![MIT license](https://img.shields.io/github/license/aesy/regex101-intellij.svg?style=flat-square)](https://github.com/aesy/regex101-intellij/blob/master/LICENSE)
 
 ## Development
@@ -25,7 +26,7 @@ To run the plugin from the command line, the following command can be used:
 
 $ `gradle runIde`
 
-This will start IntelliJ Community with all necessary plugins loaded. Logs are located at 
+This will start IntelliJ Ultimate with all necessary plugins loaded. Logs are located at 
 `build/idea-sandbox/system/log/idea.log`.
 
 ## Contribute
