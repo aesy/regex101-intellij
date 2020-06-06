@@ -8,4 +8,16 @@
     <description><![CDATA[
         Adds an intention to open regular expressions on regex101.com
      ]]></description>
+
+    <idea-version since-build="192"/>
+
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <intentionAction>
+            <className>io.aesy.regex101.OpenRegex101Intention</className>
+            <category>RegExp</category>
+            <descriptionDirectoryName>OpenRegexp101Intention</descriptionDirectoryName>
+        </intentionAction>
+    </extensions>
 </idea-plugin>
