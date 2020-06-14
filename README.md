@@ -5,6 +5,7 @@ This plugin adds an intention to open regular expressions on regex101.com
 [![Plugin repository](https://img.shields.io/jetbrains/plugin/v/14461-open-regex101?label=version&style=flat-square)](https://plugins.jetbrains.com/plugin/14461-open-regex101)
 [![Plugin downloads](https://img.shields.io/jetbrains/plugin/d/14461-open-regex101?style=flat-square)](https://plugins.jetbrains.com/plugin/14461-open-regex101)
 [![Plugin stars](https://img.shields.io/jetbrains/plugin/r/stars/14461-open-regex101?style=flat-square)](https://plugins.jetbrains.com/plugin/14461-open-regex101)
+[![Build status](https://img.shields.io/github/workflow/status/aesy/regex101-intellij/Continous%20Integration?style=flat-square)](https://github.com/aesy/regex101-intellij/actions)
 [![MIT license](https://img.shields.io/github/license/aesy/regex101-intellij.svg?style=flat-square)](https://github.com/aesy/regex101-intellij/blob/master/LICENSE)
 
 ## Installation
@@ -30,7 +31,9 @@ Show context actions on a regular expression and pick "Open RegExp on regex101.c
 
 To compile and package the plugin, simply issue the following command:
 
-$ `gradle buildPlugin`
+```sh
+$ ./gradlew buildPlugin
+```
 
 This will create a zip located in `build/distributions/`.
 
@@ -38,13 +41,17 @@ This will create a zip located in `build/distributions/`.
 
 Run the tests as you would in any other gradle project:
 
-$ `gradle test`
+```sh
+$ ./gradlew test
+```
 
 #### Run
 
 To run the plugin from the command line, the following command can be used:
 
-$ `gradle runIde`
+```sh
+$ ./gradlew runIde
+```
 
 This will start IntelliJ Ultimate with all necessary plugins loaded. Logs are located at 
 `build/idea-sandbox/system/log/idea.log`.
