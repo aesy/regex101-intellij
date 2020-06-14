@@ -2,6 +2,7 @@ package io.aesy.regex101
 
 import com.intellij.codeInsight.intention.impl.QuickEditAction
 import com.intellij.ide.BrowserUtil
+import com.intellij.ide.plugins.PluginManagerCore
 import com.intellij.lang.Language
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
@@ -39,7 +40,9 @@ class OpenRegex101Intention : QuickEditAction(), Iconable {
         val regex = urlEncode(getText(element))
         val url = "$domain/?regex=$regex&flavor=$flavor"
 
-        BrowserUtil.browse(url)
+        if (!PluginManagerCore.isUnitTestMode) {
+            BrowserUtil.browse(url)
+        }
     }
 
     private fun getElement(file: PsiFile, editor: Editor): PsiElement {

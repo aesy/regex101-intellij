@@ -9,7 +9,7 @@
         Adds an intention to open regular expressions on regex101.com
      ]]></description>
 
-    <idea-version since-build="192"/>
+    <idea-version since-build="192.5728.98"/>
 
     <depends>com.intellij.modules.lang</depends>
 

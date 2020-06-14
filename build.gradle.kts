@@ -11,16 +11,21 @@ version = "0.1"
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+
+    testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
+    testImplementation("io.strikt:strikt-core:0.26.1")
 }
 
 intellij {
     version = "IU-2020.1"
     pluginName = rootProject.name
     updateSinceUntilBuild = false
+    setPlugins("JavaScript", "java")
 }
 
 tasks {
@@ -33,6 +38,10 @@ tasks {
             apiVersion = "1.3"
             languageVersion = "1.3"
         }
+    }
+
+    withType<Test> {
+        useJUnitPlatform()
     }
 
     withType<PublishTask> {
