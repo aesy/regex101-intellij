@@ -56,7 +56,7 @@ class OpenRegex101Intention : QuickEditAction(), Iconable {
         else -> element.text
     }
 
-    private fun urlEncode(text: String): String = URLEncoder.encode(text, Charsets.UTF_8)
+    private fun urlEncode(text: String): String = URLEncoder.encode(text, Charsets.UTF_8.name())
 
     private fun Language.toFlavor(): String = when (this.id) {
         "JSRegexp", "JSUnicodeRegexp" -> "javascript"
