@@ -1,13 +1,32 @@
 <idea-plugin>
     <id>io.aesy.regex101</id>
     <name>Open Regex101</name>
-    <version>0.1</version>
+    <version>0.2</version>
     <vendor email="isak.wertwein@gmail.com" url="https://github.com/aesy/regex101-intellij">Isak Wertwein</vendor>
     <category>Intention</category>
 
     <description><![CDATA[
-        Adds an intention to open regular expressions on regex101.com
+        <html>
+        <p>Adds an intention to open regular expressions on regex101.com</p>
+        <br>
+        <img src="https://raw.githubusercontent.com/aesy/regex101-intellij/master/img/usage.png">
+        </html>
      ]]></description>
+
+    <change-notes><![CDATA[
+        <html>
+        <b>Changes in version 0.2:</b>
+        <ul>
+          <li>Fix inconsistent unescaping</li>
+          <li>Java 8 compatibility</li>
+        </ul>
+
+        <b>Changes in version 0.1:</b>
+        <ul>
+          <li>Initial release</li>
+        </ul>
+        </html>
+     ]]></change-notes>
 
     <idea-version since-build="192.5728.98"/>
 
