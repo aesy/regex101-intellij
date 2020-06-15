@@ -40,7 +40,9 @@ class OpenRegex101Intention : QuickEditAction(), Iconable {
         val regex = urlEncode(getText(element))
         val url = "$domain/?regex=$regex&flavor=$flavor"
 
-        if (!PluginManagerCore.isUnitTestMode) {
+        if (PluginManagerCore.isUnitTestMode) {
+            TestUtil.openedUrls += url
+        } else {
             BrowserUtil.browse(url)
         }
     }
