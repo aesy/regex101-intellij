@@ -2,6 +2,7 @@ import org.jetbrains.intellij.tasks.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    jacoco
     kotlin("jvm") version "1.3.61"
     id("org.jetbrains.intellij") version "0.4.21"
 }
@@ -30,6 +31,12 @@ intellij {
 }
 
 tasks {
+    jacocoTestReport {
+        reports {
+            xml.isEnabled = true
+        }
+    }
+
     withType<Wrapper> {
         gradleVersion = "6.5"
     }
@@ -47,6 +54,7 @@ tasks {
 
     withType<Test> {
         useJUnitPlatform()
+        finalizedBy(jacocoTestReport)
     }
 
     withType<PublishTask> {

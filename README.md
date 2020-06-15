@@ -6,6 +6,7 @@ This plugin adds an intention to open regular expressions on regex101.com
 [![Plugin downloads](https://img.shields.io/jetbrains/plugin/d/14461-open-regex101?style=flat-square)](https://plugins.jetbrains.com/plugin/14461-open-regex101)
 [![Plugin stars](https://img.shields.io/jetbrains/plugin/r/stars/14461-open-regex101?style=flat-square)](https://plugins.jetbrains.com/plugin/14461-open-regex101)
 [![Build status](https://img.shields.io/github/workflow/status/aesy/regex101-intellij/Continous%20Integration?style=flat-square)](https://github.com/aesy/regex101-intellij/actions)
+[![Test coverage](https://img.shields.io/codecov/c/github/aesy/regex101-intellij?style=flat-square)](https://codecov.io/github/aesy/regex101-intellij)
 [![MIT license](https://img.shields.io/github/license/aesy/regex101-intellij.svg?style=flat-square)](https://github.com/aesy/regex101-intellij/blob/master/LICENSE)
 
 ## Installation
