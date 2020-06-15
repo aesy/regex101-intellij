@@ -4,10 +4,10 @@ import com.intellij.codeInsight.intention.impl.QuickEditAction
 import com.intellij.ide.BrowserUtil
 import com.intellij.ide.plugins.PluginManagerCore
 import com.intellij.lang.Language
+import com.intellij.lang.injection.InjectedLanguageManager
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.Iconable
-import com.intellij.openapi.util.text.StringUtil
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import org.intellij.lang.regexp.RegExpLanguage
@@ -36,8 +36,10 @@ class OpenRegex101Intention : QuickEditAction(), Iconable {
             return
         }
 
+        val injectedLanguageManager = InjectedLanguageManager.getInstance(project)
+        val text = injectedLanguageManager.getUnescapedText(element)
         val flavor = element.language.toFlavor()
-        val regex = urlEncode(getText(element))
+        val regex = urlEncode(text)
         val url = "$domain/?regex=$regex&flavor=$flavor"
 
         if (PluginManagerCore.isUnitTestMode) {
@@ -51,14 +53,9 @@ class OpenRegex101Intention : QuickEditAction(), Iconable {
         return getRangePair(file, editor)?.first ?: file
     }
 
-    private fun getText(element: PsiElement): String = when (element.language.id) {
-        "RegExp", "XsdRegExp" -> StringUtil.unescapeBackSlashes(element.text)
-        else -> element.text
-    }
-
     private fun urlEncode(text: String): String = URLEncoder.encode(text, Charsets.UTF_8.name())
 
-    private fun Language.toFlavor(): String = when (this.id) {
+    private fun Language.toFlavor(): String = when (id) {
         "JSRegexp", "JSUnicodeRegexp" -> "javascript"
         "PythonRegExp", "PythonVerboseRegExp" -> "python"
         "GoRegExp" -> "golang"
