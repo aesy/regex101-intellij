@@ -1,3 +1,5 @@
+<img align="left" width="80" height="80" src="./src/main/resources/META-INF/pluginIcon.svg">
+
 # Regex101 plugin for IntelliJ-based IDEs
 
 This plugin adds an intention to open regular expressions on regex101.com
