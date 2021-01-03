@@ -1,20 +1,24 @@
 <idea-plugin>
     <id>io.aesy.regex101</id>
     <name>Open Regex101</name>
-    <version>0.2</version>
+    <version>0.3</version>
     <vendor email="isak.wertwein@gmail.com" url="https://github.com/aesy/regex101-intellij">Isak Wertwein</vendor>
     <category>Intention</category>
 
     <description><![CDATA[
         <html>
         <p>Adds an intention to open regular expressions on regex101.com</p>
-        <br>
         <img src="https://raw.githubusercontent.com/aesy/regex101-intellij/master/img/usage.png">
         </html>
      ]]></description>
 
     <change-notes><![CDATA[
         <html>
+        <b>Changes in version 0.3:</b>
+        <ul>
+          <li>Partial support for regex options/flags</li>
+        </ul>
+
         <b>Changes in version 0.2:</b>
         <ul>
           <li>Fix inconsistent unescaping</li>
@@ -31,6 +35,10 @@
     <idea-version since-build="192.5728.98"/>
 
     <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.platform</depends>
+    <depends optional="true" config-file="plugin-withJava.xml">com.intellij.modules.java</depends>
+    <depends optional="true" config-file="plugin-withKotlin.xml">org.jetbrains.kotlin</depends>
+    <depends optional="true" config-file="plugin-withJavaScript.xml">JavaScript</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <intentionAction>

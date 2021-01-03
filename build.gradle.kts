@@ -26,7 +26,7 @@ intellij {
     version = "IU-2020.1"
     pluginName = rootProject.name
     updateSinceUntilBuild = false
-    setPlugins("JavaScript", "java", "IntelliLang")
+    setPlugins("JavaScript", "java", "Kotlin", "IntelliLang")
 }
 
 tasks {

@@ -34,7 +34,7 @@ class OpenRegex101IntentionTest {
     @Test
     @DisplayName("It should not display a OpenRegex101 Intention in JavaScript elements")
     fun testIntentionDoesNotExistsInJs() {
-        val file = fixture.configureByFile("regex.js")
+        val file = fixture.configureByFile("regexp.js")
         val offset = StringUtil.lineColToOffset(file.text, 0, 1)
 
         WriteAction.runAndWait<Throwable> { fixture.editor.caretModel.moveToOffset(offset) }
@@ -47,7 +47,7 @@ class OpenRegex101IntentionTest {
     @Test
     @DisplayName("It should display a OpenRegex101 Intention in regular expression elements")
     fun testIntentionExistsInRegex() {
-        val file = fixture.configureByFile("regex.js")
+        val file = fixture.configureByFile("regexp.js")
         val offset = StringUtil.lineColToOffset(file.text, 0, 17)
 
         WriteAction.runAndWait<Throwable> { fixture.editor.caretModel.moveToOffset(offset) }
@@ -60,7 +60,7 @@ class OpenRegex101IntentionTest {
     @Test
     @DisplayName("It should be able to launch OpenRegex101 action from JavaScript regular expression")
     fun testLaunchActionJavaScript() {
-        val file = fixture.configureByFile("regex.js")
+        val file = fixture.configureByFile("regexp.js")
         val offset = StringUtil.lineColToOffset(file.text, 0, 17)
 
         WriteAction.runAndWait<Throwable> { fixture.editor.caretModel.moveToOffset(offset) }
@@ -70,19 +70,37 @@ class OpenRegex101IntentionTest {
         fixture.launchAction(intention)
 
         expectThat(TestUtil.openedUrls)
-            .containsExactly("https://regex101.com/?regex=.%2B&flavor=javascript")
+            .describedAs("Opened URLs")
+            .containsExactly("https://regex101.com/?regex=%5Babc%5D&flavor=javascript&flags=gmsi")
+    }
+
+    @Test
+    @DisplayName("It should be able to launch OpenRegex101 action from TypeScript regular expression")
+    fun testLaunchActionTypeScript() {
+        val file = fixture.configureByFile("regexp.ts")
+        val offset = StringUtil.lineColToOffset(file.text, 0, 25)
+
+        WriteAction.runAndWait<Throwable> { fixture.editor.caretModel.moveToOffset(offset) }
+
+        val intention = fixture.findSingleIntention(actionName)
+
+        fixture.launchAction(intention)
+
+        expectThat(TestUtil.openedUrls)
+            .describedAs("Opened URLs")
+            .containsExactly("https://regex101.com/?regex=%5Babc%5D&flavor=javascript&flags=gmsi")
     }
 
     @Test
     @DisplayName("It should be able to launch OpenRegex101 action from regular expression injected in Java file")
     fun testLaunchActionJava() {
-        val file = fixture.configureByFile("pattern.java")
-        val offset = StringUtil.lineColToOffset(file.text, 4, 45)
+        val file = fixture.configureByFile("Pattern.java")
+        val offset = StringUtil.lineColToOffset(file.text, 6, 44)
         val injectable = Injectable.fromLanguage(RegExpLanguage.INSTANCE)
 
         WriteAction.runAndWait<Throwable> {
             fixture.editor.caretModel.moveToOffset(offset)
-            InjectLanguageAction.invokeImpl(project, fixture.editor, fixture.file, injectable)
+            InjectLanguageAction.invokeImpl(fixture.project, fixture.editor, file, injectable)
         }
 
         val intention = fixture.findSingleIntention(actionName)
@@ -90,13 +108,35 @@ class OpenRegex101IntentionTest {
         fixture.launchAction(intention)
 
         expectThat(TestUtil.openedUrls)
-            .containsExactly("https://regex101.com/?regex=.%2B&flavor=pcre")
+            .describedAs("Opened URLs")
+            .containsExactly("https://regex101.com/?regex=%5Babc%5D&flavor=pcre&flags=gmi")
+    }
+
+    @Test
+    @DisplayName("It should be able to launch OpenRegex101 action from regular expression injected in Kotlin file")
+    fun testLaunchActionKotlin() {
+        val file = fixture.configureByFile("Regex.kts")
+        val offset = StringUtil.lineColToOffset(file.text, 2, 22)
+        val injectable = Injectable.fromLanguage(RegExpLanguage.INSTANCE)
+
+        WriteAction.runAndWait<Throwable> {
+            fixture.editor.caretModel.moveToOffset(offset)
+            InjectLanguageAction.invokeImpl(fixture.project, fixture.editor, file, injectable)
+        }
+
+        val intention = fixture.findSingleIntention(actionName)
+
+        fixture.launchAction(intention)
+
+        expectThat(TestUtil.openedUrls)
+            .describedAs("Opened URLs")
+            .containsExactly("https://regex101.com/?regex=%5Babc%5D&flavor=pcre&flags=gmi")
     }
 
     @Test
     @DisplayName("It should be able to launch OpenRegex101 action from regular expression file")
     fun testLaunchActionRegex() {
-        val file = fixture.configureByText(RegExpFileType.INSTANCE, ".+")
+        val file = fixture.configureByText(RegExpFileType.INSTANCE, "[abc]")
         val offset = StringUtil.lineColToOffset(file.text, 0, 2)
 
         WriteAction.runAndWait<Throwable> { fixture.editor.caretModel.moveToOffset(offset) }
@@ -106,6 +146,7 @@ class OpenRegex101IntentionTest {
         fixture.launchAction(intention)
 
         expectThat(TestUtil.openedUrls)
-            .containsExactly("https://regex101.com/?regex=.%2B&flavor=pcre")
+            .describedAs("Opened URLs")
+            .containsExactly("https://regex101.com/?regex=%5Babc%5D&flavor=pcre&flags=g")
     }
 }

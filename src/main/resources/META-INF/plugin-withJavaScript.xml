@@ -1,0 +1,6 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <regExpModifierProvider language="TypeScript" implementationClass="io.aesy.regex101.EcmaScriptRegExpModifierProvider"/>
+        <regExpModifierProvider language="JavaScript" implementationClass="io.aesy.regex101.EcmaScriptRegExpModifierProvider"/>
+    </extensions>
+</idea-plugin>

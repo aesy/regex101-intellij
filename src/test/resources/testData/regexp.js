@@ -1,0 +1,1 @@
+const regexp = /[abc]/im

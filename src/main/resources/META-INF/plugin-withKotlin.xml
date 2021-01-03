@@ -1,0 +1,5 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <regExpModifierProvider language="kotlin" implementationClass="io.aesy.regex101.KotlinRegExpModifierProvider"/>
+    </extensions>
+</idea-plugin>
