@@ -23,6 +23,9 @@ Show context actions on a regular expression and select "Open RegExp on regex101
 
 ![Context actions](./img/usage.png)
 
+If the intention doesn't show up, make sure your IDE recognizes the selected text element as a regular expression. 
+If it doesn't, use the `Inject language or reference` intention and set it to the correct `RegExp` flavor.
+
 ## Development
 
 #### Prerequisites
