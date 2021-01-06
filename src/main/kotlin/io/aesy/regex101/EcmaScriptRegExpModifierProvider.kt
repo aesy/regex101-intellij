@@ -25,11 +25,11 @@ class EcmaScriptRegExpModifierProvider : RegExpModifierProvider {
 
         return modifiers.toCharArray()
             .asSequence()
-            .map(this::parseRegExpnModifier)
+            .map(this::parseRegExpModifier)
             .reduce(Int::or)
     }
 
-    private fun parseRegExpnModifier(input: Char): Int {
+    private fun parseRegExpModifier(input: Char): Int {
         return when (input) {
             'i' -> Pattern.CASE_INSENSITIVE
             'm' -> Pattern.MULTILINE
