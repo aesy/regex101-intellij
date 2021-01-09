@@ -9,8 +9,8 @@ import org.intellij.lang.regexp.RegExpModifierProvider
 import java.util.regex.Pattern
 
 /**
- * Substitute for JSRegExpModifierProvider which incorrectly parses 'm' modifiers as Pattern.DOT_ALL.
- * This provider also works with TypeScript, unlike JSRegExpModifierProvider.
+ * Substitute for JSRegExpModifierProvider which, unlike JSRegExpModifierProvider, works with TypeScript and
+ * supports more modifiers.
  *
  * @see JSRegExpModifierProvider
  */
