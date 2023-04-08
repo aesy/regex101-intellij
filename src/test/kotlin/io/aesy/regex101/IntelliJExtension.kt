@@ -5,8 +5,9 @@ import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.testFramework.LightPlatformTestCase
 import com.intellij.testFramework.fixtures.CodeInsightTestFixture
-import com.intellij.testFramework.fixtures.impl.IdeaTestFixtureFactoryImpl
+import com.intellij.testFramework.fixtures.IdeaTestFixtureFactory
 import com.intellij.testFramework.fixtures.impl.LightTempDirTestFixtureImpl
+import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.extension.*
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -15,18 +16,17 @@ import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
 import kotlin.reflect.jvm.javaField
-import kotlin.test.fail
 
 annotation class IntelliJ
 
 /**
- * JUnit 5 extension for "light" IntelliJ tests
+ * JUnit 5 extension for IntelliJ tests
  */
-class IntelliJExtension : BeforeEachCallback, AfterEachCallback, ParameterResolver {
+class IntelliJExtension: BeforeEachCallback, AfterEachCallback, ParameterResolver {
     private lateinit var fixture: CodeInsightTestFixture
 
     override fun beforeEach(context: ExtensionContext) {
-        initializeFixture()
+        initializeFixture(context.displayName)
         injectInstance(context.requiredTestInstance)
     }
 
@@ -45,9 +45,9 @@ class IntelliJExtension : BeforeEachCallback, AfterEachCallback, ParameterResolv
             ?: fail("Unknown type for injection: $type")
     }
 
-    private fun initializeFixture() {
-        val factory = IdeaTestFixtureFactoryImpl()
-        val projectFixture = factory.createLightFixtureBuilder().fixture
+    private fun initializeFixture(projectName: String) {
+        val factory = IdeaTestFixtureFactory.getFixtureFactory()
+        val projectFixture = factory.createLightFixtureBuilder(projectName).fixture
         val tempDirFixture = LightTempDirTestFixtureImpl(true)
 
         fixture = factory.createCodeInsightFixture(projectFixture, tempDirFixture)
@@ -93,7 +93,7 @@ class IntelliJExtension : BeforeEachCallback, AfterEachCallback, ParameterResolv
     }
 
     private fun getTestDataPath(): Path {
-        val resourceDirectory = IntelliJExtension::class.java.getResource("/testData").toURI()
+        val resourceDirectory = IntelliJExtension::class.java.getResource("/testData")!!.toURI()
 
         return Paths.get(resourceDirectory)
     }

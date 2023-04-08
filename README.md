@@ -30,8 +30,8 @@ If it doesn't, use the `Inject language or reference` intention and set it to th
 
 #### Prerequisites
 
-* [Gradle 5.2+](https://gradle.org/)
-* [A Java 8+ Runtime](https://adoptopenjdk.net/)
+* [Gradle 8.5+](https://gradle.org/)
+* [A Java 11+ Runtime](https://adoptopenjdk.net/)
 
 #### Build
 

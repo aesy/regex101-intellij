@@ -32,7 +32,7 @@
         </html>
      ]]></change-notes>
 
-    <idea-version since-build="192.5728.98"/>
+    <idea-version since-build="221"/>
 
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.modules.platform</depends>

@@ -1,62 +1,59 @@
-import org.jetbrains.intellij.tasks.*
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    jacoco
-    kotlin("jvm") version "1.3.61"
-    id("org.jetbrains.intellij") version "0.4.21"
+    id("java")
+    id("org.jetbrains.intellij") version "1.17.2"
+    id("org.jetbrains.kotlinx.kover") version "0.7.6"
+    id("org.jetbrains.kotlin.jvm") version "1.9.22"
 }
 
 group = "io.aesy.regex101"
-version = "0.2"
+version = "0.3"
 
 repositories {
     mavenCentral()
-    jcenter()
+    mavenLocal()
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
+    testImplementation(platform("org.junit:junit-bom:5.10.2"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("io.strikt:strikt-core:0.34.1")
+}
 
-    testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
-    testImplementation("io.strikt:strikt-core:0.26.1")
+kotlin {
+    jvmToolchain(11)
 }
 
 intellij {
-    version = "IU-2020.1"
     pluginName = rootProject.name
+    version = "2022.1.1"
+    type = "IU"
     updateSinceUntilBuild = false
-    setPlugins("JavaScript", "java", "Kotlin", "IntelliLang")
+    plugins =
+        listOf(
+            "JavaScript",
+            "java",
+            "Kotlin",
+            "IntelliLang",
+            "Pythonid:221.5591.52",
+            "org.toml.lang:221.5591.26",
+            "org.rust.lang:0.4.179.4903-221",
+            "com.jetbrains.php:221.5591.58",
+            "org.jetbrains.plugins.go:221.5591.52",
+        )
 }
 
 tasks {
-    jacocoTestReport {
-        reports {
-            xml.isEnabled = true
-        }
+    wrapper {
+        gradleVersion = "8.5"
     }
 
-    withType<Wrapper> {
-        gradleVersion = "6.5"
-    }
-
-    withType<KotlinCompile> {
-        sourceCompatibility = "1.8"
-        targetCompatibility = "1.8"
-
-        kotlinOptions {
-            jvmTarget = "1.8"
-            apiVersion = "1.3"
-            languageVersion = "1.3"
-        }
-    }
-
-    withType<Test> {
+    test {
         useJUnitPlatform()
-        finalizedBy(jacocoTestReport)
     }
 
-    withType<PublishTask> {
-        token(System.getenv("INTELLIJ_HUB_TOKEN"))
+    publishPlugin {
+        token = System.getenv("INTELLIJ_HUB_TOKEN")
     }
 }
