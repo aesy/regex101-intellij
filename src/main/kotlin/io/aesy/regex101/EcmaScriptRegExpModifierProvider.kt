@@ -14,7 +14,7 @@ import java.util.regex.Pattern
  *
  * @see JSRegExpModifierProvider
  */
-class EcmaScriptRegExpModifierProvider : RegExpModifierProvider {
+class EcmaScriptRegExpModifierProvider: RegExpModifierProvider {
     override fun getFlags(element: PsiElement, file: PsiFile): Int {
         val text = when (element) {
             is JSLiteralExpression -> element.text

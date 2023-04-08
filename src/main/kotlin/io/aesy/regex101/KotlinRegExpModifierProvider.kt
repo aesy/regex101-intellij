@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.psi.KtValueArgumentList
 import java.lang.IllegalArgumentException
 import java.util.regex.Pattern
 
-class KotlinRegExpModifierProvider : RegExpModifierProvider {
+class KotlinRegExpModifierProvider: RegExpModifierProvider {
     override fun getFlags(element: PsiElement, file: PsiFile): Int {
         if (element !is KtExpression) {
             return 0

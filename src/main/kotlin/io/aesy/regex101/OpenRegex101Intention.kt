@@ -16,7 +16,7 @@ import java.net.URLEncoder
 import java.util.regex.Pattern
 import javax.swing.Icon
 
-class OpenRegex101Intention : QuickEditAction(), Iconable {
+class OpenRegex101Intention: QuickEditAction(), Iconable {
     companion object {
         const val domain: String = "https://regex101.com"
     }

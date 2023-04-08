@@ -16,7 +16,7 @@ import java.util.regex.Pattern
  *
  * @see JavaRegExpModifierProvider
  */
-class JavaPatternRegExpModifierProvider : RegExpModifierProvider {
+class JavaPatternRegExpModifierProvider: RegExpModifierProvider {
     override fun getFlags(element: PsiElement, file: PsiFile): Int {
         if (element !is PsiExpression) {
             return 0
