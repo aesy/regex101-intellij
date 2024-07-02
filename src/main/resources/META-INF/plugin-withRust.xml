@@ -1,0 +1,5 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="io.aesy.regex101">
+        <regex101Provider language="Rust" implementationClass="io.aesy.regex101.RustRegex101Provider"/>
+    </extensions>
+</idea-plugin>

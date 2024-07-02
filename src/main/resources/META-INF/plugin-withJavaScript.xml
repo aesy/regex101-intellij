@@ -1,6 +1,16 @@
 <idea-plugin>
-    <extensions defaultExtensionNs="com.intellij">
-        <regExpModifierProvider language="TypeScript" implementationClass="io.aesy.regex101.EcmaScriptRegExpModifierProvider"/>
-        <regExpModifierProvider language="JavaScript" implementationClass="io.aesy.regex101.EcmaScriptRegExpModifierProvider"/>
+    <extensions defaultExtensionNs="io.aesy.regex101">
+        <regex101Provider language="ECMAScript 6" implementationClass="io.aesy.regex101.EcmaScriptRegex101Provider"/>
+        <regex101Provider language="ECMA Script Level 4" implementationClass="io.aesy.regex101.EcmaScriptRegex101Provider"/>
+        <regex101Provider language="Flow JS" implementationClass="io.aesy.regex101.EcmaScriptRegex101Provider"/>
+        <regex101Provider language="JavaScript 1.5" implementationClass="io.aesy.regex101.EcmaScriptRegex101Provider"/>
+        <regex101Provider language="JavaScript 1.8" implementationClass="io.aesy.regex101.EcmaScriptRegex101Provider"/>
+        <regex101Provider language="JSX Harmony" implementationClass="io.aesy.regex101.EcmaScriptRegex101Provider"/>
+        <regex101Provider language="JavaScript" implementationClass="io.aesy.regex101.EcmaScriptRegex101Provider"/>
+        <regex101Provider language="Nashorn JS" implementationClass="io.aesy.regex101.EcmaScriptRegex101Provider"/>
+        <regex101Provider language="JSRegexp" implementationClass="io.aesy.regex101.EcmaScriptRegex101Provider"/>
+        <regex101Provider language="JSUnicodeRegexp" implementationClass="io.aesy.regex101.EcmaScriptRegex101Provider"/>
+        <regex101Provider language="TypeScript" implementationClass="io.aesy.regex101.EcmaScriptRegex101Provider"/>
+        <regex101Provider language="TypeScript JSX" implementationClass="io.aesy.regex101.EcmaScriptRegex101Provider"/>
     </extensions>
 </idea-plugin>

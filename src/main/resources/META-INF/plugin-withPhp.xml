@@ -1,0 +1,7 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="io.aesy.regex101">
+        <regex101Provider language="PHP" implementationClass="io.aesy.regex101.PhpRegex101Provider"/>
+        <regex101Provider language="PhpRegExp" implementationClass="io.aesy.regex101.PhpRegex101Provider"/>
+        <regex101Provider language="PhpRegExpExtended" implementationClass="io.aesy.regex101.PhpRegex101Provider"/>
+    </extensions>
+</idea-plugin>

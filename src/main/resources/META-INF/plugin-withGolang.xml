@@ -1,0 +1,6 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="io.aesy.regex101">
+        <regex101Provider language="go" implementationClass="io.aesy.regex101.GolangRegex101Provider"/>
+        <regex101Provider language="GoRegExp" implementationClass="io.aesy.regex101.GolangRegex101Provider"/>
+    </extensions>
+</idea-plugin>

@@ -1,0 +1,7 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="io.aesy.regex101">
+        <regex101Provider language="Python" implementationClass="io.aesy.regex101.PythonRegex101Provider"/>
+        <regex101Provider language="PythonRegExp" implementationClass="io.aesy.regex101.PythonRegex101Provider"/>
+        <regex101Provider language="PythonVerboseRegExp" implementationClass="io.aesy.regex101.PythonRegex101Provider"/>
+    </extensions>
+</idea-plugin>

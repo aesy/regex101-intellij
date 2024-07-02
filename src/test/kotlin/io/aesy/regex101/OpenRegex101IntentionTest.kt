@@ -20,7 +20,7 @@ import strikt.assertions.map
 @ExtendWith(IntelliJExtension::class)
 class OpenRegex101IntentionTest {
     companion object {
-        const val actionName: String = "Open RegExp on regex101.com"
+        const val ACTION_NAME: String = "Open RegExp on regex101.com"
     }
 
     @IntelliJ
@@ -41,7 +41,7 @@ class OpenRegex101IntentionTest {
 
         expectThat(fixture.availableIntentions)
             .map { it.text }
-            .doesNotContain(actionName)
+            .doesNotContain(ACTION_NAME)
     }
 
     @Test
@@ -54,7 +54,7 @@ class OpenRegex101IntentionTest {
 
         expectThat(fixture.availableIntentions)
             .map { it.text }
-            .contains(actionName)
+            .contains(ACTION_NAME)
     }
 
     @Test
@@ -65,13 +65,13 @@ class OpenRegex101IntentionTest {
 
         WriteAction.runAndWait<Throwable> { fixture.editor.caretModel.moveToOffset(offset) }
 
-        val intention = fixture.findSingleIntention(actionName)
+        val intention = fixture.findSingleIntention(ACTION_NAME)
 
         fixture.launchAction(intention)
 
         expectThat(TestUtil.openedUrls)
             .describedAs("Opened URLs")
-            .containsExactly("https://regex101.com/?regex=%5Babc%5D&flavor=javascript&flags=gmsi")
+            .containsExactly("https://regex101.com/?regex=%5Babc%5D&flavor=javascript&flags=gmi")
     }
 
     @Test
@@ -82,13 +82,13 @@ class OpenRegex101IntentionTest {
 
         WriteAction.runAndWait<Throwable> { fixture.editor.caretModel.moveToOffset(offset) }
 
-        val intention = fixture.findSingleIntention(actionName)
+        val intention = fixture.findSingleIntention(ACTION_NAME)
 
         fixture.launchAction(intention)
 
         expectThat(TestUtil.openedUrls)
             .describedAs("Opened URLs")
-            .containsExactly("https://regex101.com/?regex=%5Babc%5D&flavor=javascript&flags=gmsi")
+            .containsExactly("https://regex101.com/?regex=%5Babc%5D&flavor=javascript&flags=gmi")
     }
 
     @Test
@@ -103,7 +103,7 @@ class OpenRegex101IntentionTest {
             InjectLanguageAction.invokeImpl(fixture.project, fixture.editor, file, injectable)
         }
 
-        val intention = fixture.findSingleIntention(actionName)
+        val intention = fixture.findSingleIntention(ACTION_NAME)
 
         fixture.launchAction(intention)
 
@@ -124,7 +124,7 @@ class OpenRegex101IntentionTest {
             InjectLanguageAction.invokeImpl(fixture.project, fixture.editor, file, injectable)
         }
 
-        val intention = fixture.findSingleIntention(actionName)
+        val intention = fixture.findSingleIntention(ACTION_NAME)
 
         fixture.launchAction(intention)
 
@@ -141,7 +141,7 @@ class OpenRegex101IntentionTest {
 
         WriteAction.runAndWait<Throwable> { fixture.editor.caretModel.moveToOffset(offset) }
 
-        val intention = fixture.findSingleIntention(actionName)
+        val intention = fixture.findSingleIntention(ACTION_NAME)
 
         fixture.launchAction(intention)
 

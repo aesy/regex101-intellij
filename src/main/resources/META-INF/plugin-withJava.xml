@@ -1,5 +1,5 @@
 <idea-plugin>
-    <extensions defaultExtensionNs="com.intellij">
-        <regExpModifierProvider language="JAVA" implementationClass="io.aesy.regex101.JavaPatternRegExpModifierProvider"/>
+    <extensions defaultExtensionNs="io.aesy.regex101">
+        <regex101Provider language="JAVA" implementationClass="io.aesy.regex101.JavaRegex101Provider"/>
     </extensions>
 </idea-plugin>

@@ -16,6 +16,7 @@
         <html>
         <b>Changes in version 0.3:</b>
         <ul>
+          <li>Support for regex flavors of Golang, Python, Rust & PHP</li>
           <li>Partial support for regex options/flags</li>
         </ul>
 
@@ -36,9 +37,13 @@
 
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.modules.platform</depends>
+    <depends optional="true" config-file="plugin-withGolang.xml">org.jetbrains.plugins.go</depends>
     <depends optional="true" config-file="plugin-withJava.xml">com.intellij.modules.java</depends>
-    <depends optional="true" config-file="plugin-withKotlin.xml">org.jetbrains.kotlin</depends>
     <depends optional="true" config-file="plugin-withJavaScript.xml">JavaScript</depends>
+    <depends optional="true" config-file="plugin-withKotlin.xml">org.jetbrains.kotlin</depends>
+    <depends optional="true" config-file="plugin-withPhp.xml">com.jetbrains.php</depends>
+    <depends optional="true" config-file="plugin-withPython.xml">com.intellij.modules.python</depends>
+    <depends optional="true" config-file="plugin-withRust.xml">org.rust.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <intentionAction>
@@ -47,4 +52,10 @@
             <descriptionDirectoryName>OpenRegexp101Intention</descriptionDirectoryName>
         </intentionAction>
     </extensions>
+
+    <extensionPoints>
+        <extensionPoint qualifiedName="io.aesy.regex101.regex101Provider" beanClass="com.intellij.lang.LanguageExtensionPoint" dynamic="true">
+            <with attribute="implementationClass" implements="io.aesy.regex101.Regex101Provider" />
+        </extensionPoint>
+    </extensionPoints>
 </idea-plugin>

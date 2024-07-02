@@ -2,7 +2,6 @@ package io.aesy.regex101
 
 import com.intellij.codeInsight.intention.impl.QuickEditAction
 import com.intellij.ide.BrowserUtil
-import com.intellij.lang.Language
 import com.intellij.lang.injection.InjectedLanguageManager
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.editor.Editor
@@ -11,14 +10,13 @@ import com.intellij.openapi.util.Iconable
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import org.intellij.lang.regexp.RegExpLanguage
-import org.intellij.lang.regexp.RegExpModifierProvider
 import java.net.URLEncoder
-import java.util.regex.Pattern
+import java.nio.charset.StandardCharsets
 import javax.swing.Icon
 
 class OpenRegex101Intention: QuickEditAction(), Iconable {
     companion object {
-        const val domain: String = "https://regex101.com"
+        const val DOMAIN: String = "https://regex101.com"
     }
 
     override fun getText(): String = "Open RegExp on regex101.com"
@@ -38,13 +36,7 @@ class OpenRegex101Intention: QuickEditAction(), Iconable {
             return
         }
 
-        val injectedLanguageManager = InjectedLanguageManager.getInstance(project)
-        val text = injectedLanguageManager.getUnescapedText(element)
-        val regex = text.urlEncode()
-        val flavor = element.language.toFlavor()
-        val flags = element.getFlags()
-
-        val url = "$domain/?regex=$regex&flavor=$flavor&flags=$flags"
+        val url = getUrl(project, element, file) ?: return
 
         if (ApplicationManager.getApplication().isUnitTestMode) {
             TestUtil.openedUrls += url
@@ -53,50 +45,43 @@ class OpenRegex101Intention: QuickEditAction(), Iconable {
         }
     }
 
-    private fun PsiElement.getFlags(): String {
+    private fun getUrl(project: Project, element: PsiElement, file: PsiFile): String? {
+        val provider = getProvider(project, element, file)
+        val regex = provider.getExpression(element, file).urlEncode()
+        val flavor = provider.getFlavor(element, file)
+        val flags = provider.getFlags(element, file).joinToString()
+
+        return "$DOMAIN/?regex=$regex&flavor=$flavor&flags=$flags"
+    }
+
+    private fun getProvider(project: Project, element: PsiElement, file: PsiFile): Regex101Provider {
         val injectedLanguageManager = InjectedLanguageManager.getInstance(project)
-        val host = injectedLanguageManager.getInjectionHost(this)
-        var flags = 0
+        var host = injectedLanguageManager.getInjectionHost(element)
 
         if (host != null) {
-            for (provider in RegExpModifierProvider.EP.allForLanguage(host.language)) {
-                flags = flags or provider.getFlags(host, containingFile)
+            val provider = Regex101Provider.EP.forLanguage(host.language)
+
+            if (provider != null) {
+                return provider
             }
         }
 
-        var chars = "g"
+        host = injectedLanguageManager.getInjectionHost(file)
 
-        if (flags.hasFlag(Pattern.MULTILINE)) {
-            chars += 'm'
+        if (host != null) {
+            val provider = Regex101Provider.EP.forLanguage(host.language)
+
+            if (provider != null) {
+                return provider
+            }
         }
 
-        if (flags.hasFlag(Pattern.DOTALL)) {
-            chars += 's'
-        }
-
-        if (flags.hasFlag(Pattern.CASE_INSENSITIVE)) {
-            chars += 'i'
-        }
-
-        if (flags.hasFlag(Pattern.UNICODE_CASE) || flags.hasFlag(Pattern.UNICODE_CHARACTER_CLASS)) {
-            chars += 'u'
-        }
-
-        return chars
+        return DefaultRegex101Provider.INSTANCE
     }
-
-    private fun Int.hasFlag(flag: Int): Boolean = flag and this != 0
 
     private fun getElement(file: PsiFile, editor: Editor): PsiElement {
         return getRangePair(file, editor)?.first ?: file
     }
 
-    private fun String.urlEncode(): String = URLEncoder.encode(this, Charsets.UTF_8.name())
-
-    private fun Language.toFlavor(): String = when (id) {
-        "JSRegexp", "JSUnicodeRegexp" -> "javascript"
-        "PythonRegExp", "PythonVerboseRegExp" -> "python"
-        "GoRegExp" -> "golang"
-        else -> "pcre"
-    }
+    private fun String.urlEncode(): String = URLEncoder.encode(this, StandardCharsets.UTF_8)
 }
