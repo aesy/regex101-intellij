@@ -43,7 +43,7 @@
     <depends optional="true" config-file="plugin-withKotlin.xml">org.jetbrains.kotlin</depends>
     <depends optional="true" config-file="plugin-withPhp.xml">com.jetbrains.php</depends>
     <depends optional="true" config-file="plugin-withPython.xml">com.intellij.modules.python</depends>
-    <depends optional="true" config-file="plugin-withRust.xml">org.rust.lang</depends>
+    <depends optional="true" config-file="plugin-withRust.xml">com.jetbrains.rust</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <intentionAction>
