@@ -4,14 +4,12 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 
 class EcmaScriptRegex101Provider: Regex101Provider {
-    override fun getExpression(element: PsiElement, file: PsiFile): String {
-        return element.text.substringBeforeLast('/', "")
-    }
+    override fun getExpression(elementInHost: PsiElement, regexp: PsiFile): String = regexp.text
 
-    override fun getFlavor(element: PsiElement, file: PsiFile): String = "javascript"
+    override fun getFlavor(elementInHost: PsiElement, regexp: PsiFile): String = "javascript"
 
-    override fun getFlags(element: PsiElement, file: PsiFile): Set<String> {
-        val modifiers = element.text.substringAfterLast('/', "")
+    override fun getFlags(elementInHost: PsiElement, regexp: PsiFile): Set<String> {
+        val modifiers = elementInHost.text.substringAfterLast('/', "")
 
         return modifiers.toCharArray()
             .asSequence()

@@ -8,9 +8,9 @@ class DefaultRegex101Provider: Regex101Provider {
         val INSTANCE: DefaultRegex101Provider = DefaultRegex101Provider()
     }
 
-    override fun getExpression(element: PsiElement, file: PsiFile): String = element.text
+    override fun getExpression(elementInHost: PsiElement, regexp: PsiFile): String = regexp.text
 
-    override fun getFlavor(element: PsiElement, file: PsiFile): String = "pcre2"
+    override fun getFlavor(elementInHost: PsiElement, regexp: PsiFile): String = "pcre2"
 
-    override fun getFlags(element: PsiElement, file: PsiFile): Set<String> = setOf("g")
+    override fun getFlags(elementInHost: PsiElement, regexp: PsiFile): Set<String> = setOf("g")
 }

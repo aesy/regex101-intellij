@@ -4,16 +4,16 @@ import com.intellij.psi.*
 import com.intellij.psi.util.PsiTreeUtil
 
 class JavaRegex101Provider: Regex101Provider {
-    override fun getExpression(element: PsiElement, file: PsiFile): String = element.text
+    override fun getExpression(elementInHost: PsiElement, regexp: PsiFile): String = regexp.text
 
-    override fun getFlavor(element: PsiElement, file: PsiFile): String = "java"
+    override fun getFlavor(elementInHost: PsiElement, regexp: PsiFile): String = "java"
 
-    override fun getFlags(element: PsiElement, file: PsiFile): Set<String> {
-        if (element !is PsiExpression) {
+    override fun getFlags(elementInHost: PsiElement, regexp: PsiFile): Set<String> {
+        if (elementInHost !is PsiExpression) {
             return emptySet()
         }
 
-        val list = PsiTreeUtil.getParentOfType(element, PsiExpressionList::class.java)
+        val list = PsiTreeUtil.getParentOfType(elementInHost, PsiExpressionList::class.java)
             ?: return emptySet()
         val expressions = list.expressions
 

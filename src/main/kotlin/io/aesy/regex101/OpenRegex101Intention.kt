@@ -36,7 +36,8 @@ class OpenRegex101Intention: QuickEditAction(), Iconable {
             return
         }
 
-        val url = getUrl(project, element, file) ?: return
+        val host = getHost(project, element)
+        val url = getUrl(host, file) ?: return
 
         if (ApplicationManager.getApplication().isUnitTestMode) {
             TestUtil.openedUrls += url
@@ -45,38 +46,24 @@ class OpenRegex101Intention: QuickEditAction(), Iconable {
         }
     }
 
-    private fun getUrl(project: Project, element: PsiElement, file: PsiFile): String? {
-        val provider = getProvider(project, element, file)
+    private fun getUrl(element: PsiElement, file: PsiFile): String? {
+        val provider = getProvider(element)
         val regex = provider.getExpression(element, file).urlEncode()
         val flavor = provider.getFlavor(element, file)
-        val flags = provider.getFlags(element, file).joinToString()
+        val flags = provider.getFlags(element, file).joinToString("")
 
         return "$DOMAIN/?regex=$regex&flavor=$flavor&flags=$flags"
     }
 
-    private fun getProvider(project: Project, element: PsiElement, file: PsiFile): Regex101Provider {
-        val injectedLanguageManager = InjectedLanguageManager.getInstance(project)
-        var host = injectedLanguageManager.getInjectionHost(element)
+    private fun getProvider(host: PsiElement): Regex101Provider {
+        return Regex101Provider.EP.forLanguage(host.language)
+            ?: DefaultRegex101Provider.INSTANCE
+    }
 
-        if (host != null) {
-            val provider = Regex101Provider.EP.forLanguage(host.language)
+    private fun getHost(project: Project, element: PsiElement): PsiElement {
+        val manager = InjectedLanguageManager.getInstance(project)
 
-            if (provider != null) {
-                return provider
-            }
-        }
-
-        host = injectedLanguageManager.getInjectionHost(file)
-
-        if (host != null) {
-            val provider = Regex101Provider.EP.forLanguage(host.language)
-
-            if (provider != null) {
-                return provider
-            }
-        }
-
-        return DefaultRegex101Provider.INSTANCE
+        return manager.getInjectionHost(element) ?: element
     }
 
     private fun getElement(file: PsiFile, editor: Editor): PsiElement {

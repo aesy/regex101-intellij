@@ -4,9 +4,9 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 
 class RustRegex101Provider: Regex101Provider {
-    override fun getExpression(element: PsiElement, file: PsiFile): String = element.text
+    override fun getExpression(elementInHost: PsiElement, regexp: PsiFile): String = regexp.text
 
-    override fun getFlavor(element: PsiElement, file: PsiFile): String = "rust"
+    override fun getFlavor(elementInHost: PsiElement, regexp: PsiFile): String = "rust"
 
-    override fun getFlags(element: PsiElement, file: PsiFile): Set<String> = setOf("g")
+    override fun getFlags(elementInHost: PsiElement, regexp: PsiFile): Set<String> = setOf("g")
 }

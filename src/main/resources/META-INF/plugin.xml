@@ -33,12 +33,12 @@
         </html>
      ]]></change-notes>
 
-    <idea-version since-build="221"/>
+    <idea-version since-build="243"/>
 
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.modules.platform</depends>
     <depends optional="true" config-file="plugin-withGolang.xml">org.jetbrains.plugins.go</depends>
-    <depends optional="true" config-file="plugin-withJava.xml">com.intellij.modules.java</depends>
+    <depends optional="true" config-file="plugin-withJava.xml">com.intellij.java</depends>
     <depends optional="true" config-file="plugin-withJavaScript.xml">JavaScript</depends>
     <depends optional="true" config-file="plugin-withKotlin.xml">org.jetbrains.kotlin</depends>
     <depends optional="true" config-file="plugin-withPhp.xml">com.jetbrains.php</depends>

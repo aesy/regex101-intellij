@@ -2,7 +2,7 @@ import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 
 plugins {
     id("java")
-    id("org.jetbrains.intellij.platform") version "2.2.0"
+    id("org.jetbrains.intellij.platform") version "2.2.1"
     id("org.jetbrains.kotlinx.kover") version "0.9.0"
     id("org.jetbrains.kotlin.jvm") version "2.1.0"
 }
@@ -42,17 +42,15 @@ dependencies {
         // https://github.com/JetBrains/intellij-platform-gradle-plugin/issues/1838
         bundledPlugin("com.intellij.llmInstaller")
 
-        // https://plugins.jetbrains.com/plugin/631-python/versions
-        plugin("Pythonid", "243.22562.218")
-
-        // https://plugins.jetbrains.com/plugin/8195-toml/versions
-        plugin("org.toml.lang", "243.21565.122")
+        // https://plugins.jetbrains.com/plugin/7322-python-community-edition/versions
+        plugin("PythonCore", "243.22562.145")
 
         // https://plugins.jetbrains.com/plugin/22407-rust/versions
-        plugin("com.jetbrains.rust", "243.22562.230")
+        // https://github.com/JetBrains/intellij-platform-gradle-plugin/issues/1819
+        // plugin("com.jetbrains.rust", "243.22562.230")
 
         // https://plugins.jetbrains.com/plugin/6610-php/versions
-        plugin("com.jetbrains.php", "243.22562.233")
+        // plugin("com.jetbrains.php", "243.22562.233")
 
         // https://plugins.jetbrains.com/plugin/9568-go/versions
         plugin("org.jetbrains.plugins.go", "243.22562.218")
